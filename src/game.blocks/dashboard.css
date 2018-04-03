@@ -1,0 +1,39 @@
+.dashboard{
+    background-color: #339999;
+    width: 100%;     
+    margin: 0;    
+    padding: 0;    
+    display: grid;    
+    grid-template-rows: auto 1fr;
+}
+
+.dashboard__content{    
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.dashboard__content_center{
+    text-align: center;
+}
+
+.start{
+    display: grid;        
+    align-items: center;
+    justify-items: center;
+}
+
+.greeting{
+    font-size: 36px;
+    letter-spacing: 6px;
+}
+
+.title{
+    letter-spacing: 4px;
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+.rules__rule{
+    font-size: 18px;
+    letter-spacing: 2px; 
+}

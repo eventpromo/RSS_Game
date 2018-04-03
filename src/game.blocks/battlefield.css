@@ -1,0 +1,30 @@
+.battlefield{
+    display: grid;
+    grid-gap: 10px;
+    grid-template: repeat(3, 1fr) / repeat(6, 1fr);    
+}
+
+.battlefield__cell{
+    border: 1px solid #333366;
+    background-color: #FF9999;        
+}
+
+.battlefield__cell_got{    
+    background-image: url('../../img/game_of_throne/0.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.battlefield_novice{
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);    
+}
+
+.battlefield_advance{
+    grid-template: repeat(6, 1fr) / repeat(9, 1fr);
+}
+
+.battlefield__content{
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+

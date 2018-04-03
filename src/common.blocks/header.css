@@ -1,0 +1,21 @@
+.header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.header__game{
+    justify-self: left;
+}
+
+.header__logo{
+    justify-self: center;
+}
+
+.header__user{
+    justify-self: right;
+}
+
+.logo{
+    width: 10vw;
+}
