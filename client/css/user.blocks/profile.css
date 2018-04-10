@@ -1,0 +1,13 @@
+.profile{    
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.profile__form{
+    width: 50vw;
+}
+
+.profile__input-block{
+    margin: 10px 0;
+}

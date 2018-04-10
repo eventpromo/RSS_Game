@@ -1,6 +1,4 @@
-export default class Http{ 
-    constructor(){ }
-    
+export default class Http{     
     handler(xhr, resolve, reject){
         xhr.onload = function() {
             if (this.status == 200) {
