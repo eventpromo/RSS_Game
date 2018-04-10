@@ -1,5 +1,5 @@
 import Http from './lib/http';
-import {profileInit} from './dashboard';
+import {profileInit} from './profile';
 
 export default function(){
     let profileButton = document.querySelector('.profile-button');
