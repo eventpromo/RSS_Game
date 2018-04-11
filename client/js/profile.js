@@ -1,4 +1,5 @@
-import {settingInit} from './setting';
+import Http from './lib/http';
+import {init as settingInit} from './setting';
 
 class Profile{
     constructor(firstName, lastName, email){
@@ -14,9 +15,9 @@ class Profile{
 }
 
 function init(){
-    let profileButton = document.querySelector('.start-button');
+    let startButton = document.querySelector('.start-button');
 
-    profileButton.onclick = function(event){
+    startButton.addEventListener("click", function(event){
         event.preventDefault();
         let form = document.querySelector(".profile .form");
         let profile = new Profile(form.firstName, form.lastName, form.email);
@@ -24,11 +25,11 @@ function init(){
         new Http().get("../templates/setting.html").then(function(response){            
             document.querySelector('.dashboard .dashboard__body').innerHTML = response;
             settingInit();
-        });                
-    };
+        });            
+    });   
 }
 
-export default {
+export {
     init,
     Profile    
 }

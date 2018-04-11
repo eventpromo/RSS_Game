@@ -39,3 +39,13 @@ https://colorscheme.ru/#3ie1ThWs0g0g0
 .g-all-height{
     height: 100%;
 }
+
+h1{
+    font-size: 36px;
+    letter-spacing: 6px;
+}
+
+h2{
+    letter-spacing: 4px;
+    font-size: 24px;    
+}

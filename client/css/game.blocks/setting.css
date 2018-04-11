@@ -1,0 +1,45 @@
+.setting{
+    background-color: #339999;
+    width: 100%;     
+    margin: 0;    
+    padding: 0;    
+    display: grid; 
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: auto 1fr auto;
+}
+
+.setting__body{
+    width: 100%;
+    display: grid; 
+    align-self: flex-start;    
+}
+
+.setting__block{
+    display: grid;
+    grid-template: auto 1fr / repeat(3, 1fr);  
+    justify-items: center;
+    align-items: center;
+}
+
+.setting__title{
+    grid-auto-rows: auto;
+    grid-area: 1 / 4 / 1 / 1;
+}
+
+.complexity{
+    cursor: pointer;    
+    border: 1px solid transparent; 
+}
+.complexity:hover{
+    border: 1px solid #FF9999;     
+}
+
+.complexity td{
+    padding: 10px 15px;
+    border: 1px solid #666699; 
+}
+
+.setting__block_background .setting__item{
+    
+}

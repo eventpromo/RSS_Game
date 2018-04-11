@@ -6,7 +6,7 @@ class Battlefield{
 
 }
 
-export default {
+export {
     init,
     Battlefield
 }

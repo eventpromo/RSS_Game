@@ -20,7 +20,7 @@
 }
 
 .battlefield_advance{
-    grid-template: repeat(6, 1fr) / repeat(9, 1fr);
+    grid-template: repeat(6, 1fr) / repeat(6, 1fr);
 }
 
 .battlefield__content{
