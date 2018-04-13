@@ -3,13 +3,33 @@ import Block from './lib/block';
 
 class Profile extends Block{      
     constructor(){
-        super("../templates/profile.html");    
-        this.newGameButton = html.querySelector('.button_new-game');
-        this.ratingButton = html.querySelector('.button_rating');
-        this.profileButton = html.querySelector('.button_profile');
-        this.body = html.querySelector('.dashboard__body');
-        
+        super("../templates/profile.html");   
+
+        this.addListeners();        
     }
+
+    addListeners(){
+        this.newGameButton.addEventListener('click', function(){
+
+        });
+
+        this.profileButton.addEventListener('click', function(){
+            
+        });
+
+        this.ratingButton.addEventListener('click', function(){
+            
+        });
+    }
+
+     // let profileButton = document.querySelector('.profile-button');
+    
+        // profileButton.addEventListener("click", function(){
+        //     new Http().get("../templates/profile.html").then(function(response){            
+        //         document.querySelector('.dashboard .dashboard__body').innerHTML = response;
+        //         profileInit();
+        //     });    
+        // });
     
     // save(){
     //     localStorage['currentUser'] = this.email;

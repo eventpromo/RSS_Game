@@ -1,6 +1,7 @@
 export default class Http{  
     handler(xhr, resolve, reject){
         xhr.onload = function() {
+            debugger;
             if (this.status == 200) {
                 resolve(this.response);
             } else {
@@ -19,7 +20,7 @@ export default class Http{
         let scope = this;
         let promise = new Promise(function(resolve, reject){
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', url, async = true);  
+            xhr.open('GET', url, async);  
             scope.handler(xhr, resolve, reject);
             xhr.send();
         });
@@ -31,7 +32,7 @@ export default class Http{
         let promise = new Promise(function(resolve, reject){
             let xhr = new XMLHttpRequest();
             let json = JSON.stringify(data);
-            xhr.open('POST', url, async = true);
+            xhr.open('POST', url, async);
             xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');    
             scope.handler(xhr, resolve, reject);    
             xhr.send(json);

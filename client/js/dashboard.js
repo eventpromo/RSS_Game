@@ -1,28 +1,21 @@
-import Http from './lib/http';
+import Block from './lib/block';
 
 class Dashboard extends Block{      
     constructor(){
         super("../templates/dashboard.html");
         
-        this.newGameButton = this.html.querySelector('.button_new-game');
-        this.ratingButton = this.html.querySelector('.button_rating');
-        this.profileButton = this.html.querySelector('.button_profile');
-        this.body = this.html.querySelector('.dashboard__body'); 
-
-        this.addListeners();
-      
-        // let profileButton = document.querySelector('.profile-button');
+        this.loaded.then(() => {
+            this.newGameButton = this.html.querySelector('#button_new-game');
+            this.ratingButton = this.html.querySelector('#button_rating');
+            this.profileButton = this.html.querySelector('#button_profile');
+            this.body = this.html.querySelector('.dashboard__body'); 
     
-        // profileButton.addEventListener("click", function(){
-        //     new Http().get("../templates/profile.html").then(function(response){            
-        //         document.querySelector('.dashboard .dashboard__body').innerHTML = response;
-        //         profileInit();
-        //     });    
-        // });
-    } 
+            this.addListeners();
+        });        
+    }    
+    
+    loaded(){
 
-    get element(){
-        this.html;
     }
 
     load(elem){
@@ -31,15 +24,15 @@ class Dashboard extends Block{
     }
 
     addListeners(){
-        this.newGameButton.addListeners('click', function(){
+        this.newGameButton.addEventListener('click', function(){
 
         });
 
-        this.profileButton.addListeners('click', function(){
+        this.profileButton.addEventListener('click', function(){
             
         });
 
-        this.ratingButton.addListeners('click', function(){
+        this.ratingButton.addEventListener('click', function(){
             
         });
     }

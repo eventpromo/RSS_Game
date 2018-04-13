@@ -1,12 +1,7 @@
-function init(){
+import Block from './lib/block';
+
+class Battlefield extends{
 
 }
 
-class Battlefield{
-
-}
-
-export {
-    init,
-    Battlefield
-}
+export default Battlefield;
