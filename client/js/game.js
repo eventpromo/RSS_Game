@@ -7,11 +7,13 @@ class Game{
     constructor(){
         this.dashboard = new Dashboard();
         this.profile = new Profile();
-        this.dashboard.load(new Start().element);
+        new Start().getElement().then((element) => {
+            this.dashboard.upload(element);
+        });        
     }
 
-    get element(){
-        this.dashboard.element;
+    async load(){
+        return await this.dashboard.getElement();
     }
 }
 

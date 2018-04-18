@@ -1,7 +1,6 @@
 export default class Http{  
     handler(xhr, resolve, reject){
-        xhr.onload = function() {
-            debugger;
+        xhr.onload = function() {            
             if (this.status == 200) {
                 resolve(this.response);
             } else {

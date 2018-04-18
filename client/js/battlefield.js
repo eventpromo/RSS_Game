@@ -1,6 +1,6 @@
-import Block from './lib/block';
+import Component from './lib/component';
 
-class Battlefield extends{
+class Battlefield extends Component{
 
 }
 

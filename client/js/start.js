@@ -1,11 +1,17 @@
 import Http from './lib/http';
-import Block from './lib/block';
+import Component from './lib/component';
 
-class Start extends Block {
+class Start extends Component {
     constructor(){
         super("../templates/start.html");   
 
-        this.startButton = this.html.querySelector('.button_start"');
+        this.loading = this.loading.then(() => {
+            this.startButton = this.html.querySelector('.button_start"');
+    
+            this.addListeners();
+
+            return this.startButton;
+        });            
     }
 
     addListeners(){

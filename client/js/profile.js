@@ -1,7 +1,7 @@
 import Http from './lib/http';
-import Block from './lib/block';
+import Component from './lib/component';
 
-class Profile extends Block{      
+class Profile extends Component{      
     constructor(){
         super("../templates/profile.html");   
 
@@ -9,17 +9,17 @@ class Profile extends Block{
     }
 
     addListeners(){
-        this.newGameButton.addEventListener('click', function(){
+        // this.newGameButton.addEventListener('click', function(){
 
-        });
+        // });
 
-        this.profileButton.addEventListener('click', function(){
+        // this.profileButton.addEventListener('click', function(){
             
-        });
+        // });
 
-        this.ratingButton.addEventListener('click', function(){
+        // this.ratingButton.addEventListener('click', function(){
             
-        });
+        // });
     }
 
      // let profileButton = document.querySelector('.profile-button');
