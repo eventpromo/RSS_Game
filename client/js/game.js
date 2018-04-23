@@ -1,19 +1,32 @@
+
 import Http from './lib/http';
 import Dashboard from './dashboard';
 import Profile from './profile';
+import Setting from './setting';
 import Start from './start';
 
 class Game{
     constructor(){
         this.dashboard = new Dashboard();
-        this.profile = new Profile();
-        new Start().getElement().then((element) => {
-            this.dashboard.upload(element);
-        });        
+        this.user = new Profile();
+        this.start = new Start();
+        this.setting = new Setting();
+        this.loading = this.dashboard.upload(this.start);
+        this.addListeners();
     }
 
-    async load(){
-        return await this.dashboard.getElement();
+    addListeners(){
+        document.addEventListener('startClick', () => {
+            this.dashboard.upload(this.profile);
+        });  
+        
+        document.addEventListener('profileSaved', () => {
+            this.dashboard.upload(this.setting);
+        });  
+    }
+
+    load(){
+        return this.loading;
     }
 }
 

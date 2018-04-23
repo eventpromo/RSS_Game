@@ -5,18 +5,18 @@ class Start extends Component {
     constructor(){
         super("../templates/start.html");   
 
-        this.loading = this.loading.then(() => {
-            this.startButton = this.html.querySelector('.button_start"');
+        this.loading = this.loading.then((html) => {
+            this.startButton = html.querySelector('.button_start');
     
             this.addListeners();
 
-            return this.startButton;
+            return html;
         });            
     }
 
     addListeners(){
-        this.startButton.addListeners('click', function(){
-
+        this.startButton.addEventListener('click', function(event){
+            document.dispatchEvent(new CustomEvent('startClick', { 'base': this.event }));
         });       
     }
 }

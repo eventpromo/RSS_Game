@@ -3,53 +3,38 @@ import Component from './lib/component';
 
 class Profile extends Component{      
     constructor(){
-        super("../templates/profile.html");   
+        super("../templates/profile.html"); 
+        this.data = {}; 
+        
+        this.loading = this.loading.then((html) => {
+            this.saveButton = html.querySelector('.save-button');            
+    
+            this.addListeners();
 
-        this.addListeners();        
+            return html;
+        });            
     }
 
     addListeners(){
-        // this.newGameButton.addEventListener('click', function(){
-
-        // });
-
-        // this.profileButton.addEventListener('click', function(){
-            
-        // });
-
-        // this.ratingButton.addEventListener('click', function(){
-            
-        // });
-    }
-
-     // let profileButton = document.querySelector('.profile-button');
+        this.saveButton.addEventListener('click', function(event){
+            event.preventDefault();
+            let form = this.html.querySelector(".profile .form");
+            this.data = {
+                firstName: form.firstName,
+                lastName: form.lastName, 
+                email: form.email
+            }
+            this.save();                  
+        });
+    }   
     
-        // profileButton.addEventListener("click", function(){
-        //     new Http().get("../templates/profile.html").then(function(response){            
-        //         document.querySelector('.dashboard .dashboard__body').innerHTML = response;
-        //         profileInit();
-        //     });    
-        // });
-    
-    // save(){
-    //     localStorage['currentUser'] = this.email;
-    //     localStorage[this.email] = JSON.stringify(this);
-    // }    
+    save(){
+        window.localStorage['currentUser'] = this.data.email;
+        window.localStorage[this.data.email] = JSON.stringify(this.data);
+        document.dispatchEvent(new CustomEvent('profileSaved', { 'profile': this.data }));
+    }    
 }
 
-// function init(){
-//     let startButton = document.querySelector('.start-button');
 
-//     startButton.addEventListener("click", function(event){
-//         event.preventDefault();
-//         let form = document.querySelector(".profile .form");
-//         let profile = new Profile(form.firstName, form.lastName, form.email);
-//         profile.save();
-//         new Http().get("../templates/setting.html").then(function(response){            
-//             document.querySelector('.dashboard .dashboard__body').innerHTML = response;
-//             settingInit();
-//         });            
-//     });   
-// }
 
 export default Profile;
