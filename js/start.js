@@ -1,17 +1,23 @@
-import Http from './lib/http';
-import Component from './lib/component';
-
-class Start extends Component {
+class Start {
     constructor(){
-        super("../templates/start.html");   
+        render();          
+    }
 
-        this.loading = this.loading.then((html) => {
-            this.startButton = html.querySelector('.button_start');
-    
-            this.addListeners();
-
-            return html;
-        });            
+    render(){
+        this.element = document.createElement('div');
+        this.element.classList.add('start', 'g-all-height');
+        this.element.innerHTML = ` <div class="greeting">
+                Приветствую!
+            </div>
+            <div class="rules">
+                <h2 class="title">Правила игры: </h2>
+                <p class="rules__rule">Вы должны найти все пары карт за 2 минуты.</p>
+                <p class="rules__rule">Для старта необходимо ввести пользовательские данные.</p>
+            </div> 
+            <div>
+                <button class="button button_start">Заполнить данные</button>
+            </div>`;
+        return this.element;
     }
 
     addListeners(){
