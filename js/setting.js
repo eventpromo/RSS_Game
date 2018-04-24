@@ -5,23 +5,23 @@ class Setting extends HTMLElement {
         <div class="setting__body">
             <div class="setting__block setting__block_complexity">
                 <h2 class="setting__title">Сложность: </h2>
-                <div class="setting__item setting__item_novice">                    
+                <div data-complexity="novice" class="setting__item setting__item_novice">                    
                     ${this.renderComplexityTable(3, 3)}                    
                 </div>
-                <div class="setting__item setting__item_advance">
+                <div data-complexity="advance" class="setting__item setting__item_advance">
                     ${this.renderComplexityTable(6, 6)}
                 </div>
-                <div class="setting__item setting__item_medium">
+                <div data-complexity="medium" class="setting__item setting__item_medium">
                     ${this.renderComplexityTable(5, 4)}
                 </div>
             </div>
             <div class="setting__block setting__block_background">
                 <h2 class="setting__title">Рубашка: </h2>
-                <div class="setting__item setting__item_cars">                    
+                <div data-background="cars" class="setting__item setting__item_cars">                    
                 </div>
-                <div class="setting__item setting__item_footbal">                    
+                <div data-background="football" class="setting__item setting__item_football">                    
                 </div>
-                <div class="setting__item setting__item_got">                    
+                <div data-background="got" class="setting__item setting__item_got">                    
                 </div>
             </div>
         </div>
@@ -49,15 +49,18 @@ class Setting extends HTMLElement {
 
     addListeners(){                
         this.settingBody = this.querySelector('.setting__body');
-        this.settingBody.addEventListener('click', function(event){                    
-            if(event.target.classList.contains('setting__item')){                
-                let items = event.target.parentElement.querySelectorAll('.setting__item');
+        this.settingBody.addEventListener('click', function(event){ 
+            let target = event.target.classList.contains('setting__item') ? event.target : event.target.closest('.setting__item');            
+            if(target){   
+                this.complexity = target.dataset.complexity ? target.dataset.complexity : this.complexity;
+                this.background = target.dataset.background ? target.dataset.background : this.background;
+                let items = target.parentElement.querySelectorAll('.setting__item');
                 items.forEach(element => {
                     element.classList.remove('setting__item_selected');
                 });       
-                event.target.classList.add('setting__item_selected');
+                target.classList.add('setting__item_selected');
             }
-        }, true);       
+        });       
 
         this.saveButton.addEventListener('click', function(event){
             document.dispatchEvent(new CustomEvent('startClick', { 'base': event }));
