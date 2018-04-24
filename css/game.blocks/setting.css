@@ -27,19 +27,45 @@
     grid-area: 1 / 4 / 1 / 1;
 }
 
-.complexity{
-    cursor: pointer;    
-    border: 1px solid transparent; 
-}
-.complexity:hover{
-    border: 1px solid #FF9999;     
-}
-
 .complexity td{
     padding: 10px 15px;
     border: 1px solid #666699; 
 }
 
+.setting__item{
+    cursor: pointer;    
+    border: 1px solid transparent; 
+}
+
 .setting__block_background .setting__item{
-    
+    width: 200px;
+    height: 200px;
+    border: 1px solid #666699;     
+    background-color: #ffffff;    
+}
+
+.setting__item_selected{
+    border: 1px solid #FF9999!important;  
+}
+
+.setting__item:hover{
+    border: 1px solid #FF9999;     
+}
+
+.setting__item_cars{
+    background-image: url('./../../img/cars/0.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.setting__item_footbal{
+    background-image: url('./../../img/football/0.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.setting__item_got{
+    background-image: url('./../../img/got/0.png');
+    background-position: center;
+    background-size: cover;
 }

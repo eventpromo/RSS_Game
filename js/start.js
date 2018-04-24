@@ -1,12 +1,7 @@
-class Start {
-    constructor(){
-        render();          
-    }
-
-    render(){
-        this.element = document.createElement('div');
-        this.element.classList.add('start', 'g-all-height');
-        this.element.innerHTML = ` <div class="greeting">
+class Start extends HTMLElement{
+    createdCallback(){  
+        this.classList.add('start', 'g-all-height');
+        this.innerHTML = ` <div class="greeting">
                 Приветствую!
             </div>
             <div class="rules">
@@ -17,12 +12,13 @@ class Start {
             <div>
                 <button class="button button_start">Заполнить данные</button>
             </div>`;
-        return this.element;
-    }
+        this.addListeners();
+    }  
 
     addListeners(){
+        this.startButton = this.querySelector('.button_start');
         this.startButton.addEventListener('click', function(event){
-            document.dispatchEvent(new CustomEvent('startClick', { 'base': this.event }));
+            this.dispatchEvent(new CustomEvent('startClick', { bubbles: true, base: this.event }));
         });       
     }
 }
