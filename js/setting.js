@@ -1,4 +1,9 @@
 class Setting extends HTMLElement {
+    constructor(){
+        super();
+        this.createdCallback();
+    }
+
     createdCallback(){  
         this.setAttribute('class', 'setting g-all-height');
         this.innerHTML = `<h1>Настройки игры</h2>
@@ -12,7 +17,7 @@ class Setting extends HTMLElement {
                     ${this.renderComplexityTable(6, 6)}
                 </div>
                 <div data-complexity="medium" class="setting__item setting__item_medium">
-                    ${this.renderComplexityTable(5, 4)}
+                    ${this.renderComplexityTable(3, 6)}
                 </div>
             </div>
             <div class="setting__block setting__block_background">
@@ -47,9 +52,9 @@ class Setting extends HTMLElement {
         return table.outerHTML;
     }
 
-    addListeners(){                
+    addListeners(){
         this.settingBody = this.querySelector('.setting__body');
-        this.settingBody.addEventListener('click', function(event){ 
+        this.settingBody.addEventListener('click', (event) => { 
             let target = event.target.classList.contains('setting__item') ? event.target : event.target.closest('.setting__item');            
             if(target){   
                 this.complexity = target.dataset.complexity ? target.dataset.complexity : this.complexity;
@@ -62,8 +67,14 @@ class Setting extends HTMLElement {
             }
         });       
 
-        this.saveButton.addEventListener('click', function(event){
-            document.dispatchEvent(new CustomEvent('startClick', { 'base': event }));
+        this.saveButton.addEventListener('click', (event) => {
+            this.dispatchEvent(new CustomEvent('settingSaved', { 
+                bubbles: true,
+                detail: {
+                    complexity: this.complexity, 
+                    background: this.background 
+                }                
+            }));
         });       
     }
 }

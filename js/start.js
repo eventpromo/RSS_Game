@@ -1,4 +1,9 @@
 class Start extends HTMLElement{
+    constructor(){
+        super();
+        this.createdCallback();
+    }
+
     createdCallback(){  
         this.classList.add('start', 'g-all-height');
         this.innerHTML = ` <div class="greeting">
@@ -18,7 +23,7 @@ class Start extends HTMLElement{
     addListeners(){
         this.startButton = this.querySelector('.button_start');
         this.startButton.addEventListener('click', function(event){
-            this.dispatchEvent(new CustomEvent('startClick', { bubbles: true, base: this.event }));
+            this.dispatchEvent(new CustomEvent('startClick', { bubbles: true, detail: this.event }));
         });       
     }
 }

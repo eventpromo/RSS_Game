@@ -1,4 +1,8 @@
-class Dashboard extends HTMLElement {    
+class Dashboard extends HTMLElement { 
+    constructor(){
+        super();
+        this.createdCallback();
+    }
     createdCallback(){        
         this.setAttribute('class', 'dashboard dashboard__content g-all-height');
         this.innerHTML = `<div class="header">

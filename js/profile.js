@@ -1,4 +1,9 @@
-class Profile extends HTMLElement{      
+class Profile extends HTMLElement{ 
+    constructor(){
+        super();
+        this.createdCallback();
+    }
+    
     createdCallback(){  
         this.setAttribute('class', 'profile g-all-height');
         this.innerHTML = `<form class="profile__form form">
@@ -41,7 +46,7 @@ class Profile extends HTMLElement{
     save(){
         window.localStorage['currentUser'] = this.data.email;
         window.localStorage[this.data.email] = JSON.stringify(this.data);
-        this.dispatchEvent(new CustomEvent('profileSaved', { profile: this.data, bubbles: true }));
+        this.dispatchEvent(new CustomEvent('profileSaved', { detail: this.data, bubbles: true }));
     }    
 }
 
