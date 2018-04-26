@@ -20,6 +20,24 @@ class Game extends HTMLElement {
         this.addListeners();
     }
 
+    startTimer(minutes){        
+        let seconds = minutes * 60;
+        this.dashboard.timer.textContent = seconds.secondsToHhMmSs();
+        var timerId = setInterval(() => {
+            seconds--;
+            this.dashboard.timer.textContent = seconds.secondsToHhMmSs();          
+        }, 1000);
+                
+        setTimeout(() => {
+            clearInterval(timerId);  
+            this.profile = new Profile();
+            let youAreLooser = document.createElement('h2');
+            youAreLooser.classList.add('title');
+            youAreLooser.textContent = 'Вы проиграли!';
+            this.dashboard.renderBody(youAreLooser);          
+        }, minutes * 60 * 1000);
+    }    
+
     addListeners() {
         this.addEventListener('startClick', function (event) {
             this.profile = new Profile();
@@ -34,6 +52,7 @@ class Game extends HTMLElement {
         this.addEventListener('settingSaved', function (event) {
             this.battlefield = new Battlefield(event.detail.complexity, event.detail.background);
             this.dashboard.renderBody(this.battlefield);
+            this.startTimer(2);
         });
     }
 }

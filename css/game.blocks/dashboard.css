@@ -12,6 +12,12 @@
     padding: 20px;
 }
 
+.dashboard__body{
+    display: grid;        
+    align-items: center;
+    justify-items: center;
+}
+
 .dashboard__content_center{
     text-align: center;
 }

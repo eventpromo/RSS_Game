@@ -9,18 +9,17 @@ class Dashboard extends HTMLElement {
                 <div class="header__game">
                     <button class="button button_new-game">New game</button>
                 </div>
-                <div class="header_logo">
-                    <img class="logo">
+                <div class="header_timer">
+                    <div class="timer"></div>
                 </div>
                 <div class="header__user">
                     <button class="button button_profile">Profile</button>
                     <button class="button button_rating">Rating</button>
                 </div>
             </div>
-            <div class="dashboard__body"></div>`;
-            
+            <div class="dashboard__body"></div>`;            
         this.body = this.querySelector('.dashboard__body');
-        
+        this.timer = this.querySelector('.timer');
         this.addListeners();
     }  
 

@@ -5,19 +5,24 @@ class Setting extends HTMLElement {
     }
 
     createdCallback(){  
+        this.complexities = {
+            novice: { x: 4, y : 3},
+            medium: { x: 6, y : 4},
+            advance: { x: 6, y : 6}
+        };
         this.setAttribute('class', 'setting g-all-height');
         this.innerHTML = `<h1>Настройки игры</h2>
         <div class="setting__body">
             <div class="setting__block setting__block_complexity">
                 <h2 class="setting__title">Сложность: </h2>
                 <div data-complexity="novice" class="setting__item setting__item_novice">                    
-                    ${this.renderComplexityTable(3, 3)}                    
+                    ${this.renderComplexityTable(this.complexities.novice)}                    
                 </div>
                 <div data-complexity="advance" class="setting__item setting__item_advance">
-                    ${this.renderComplexityTable(6, 6)}
+                    ${this.renderComplexityTable(this.complexities.advance)}                    
                 </div>
                 <div data-complexity="medium" class="setting__item setting__item_medium">
-                    ${this.renderComplexityTable(3, 6)}
+                    ${this.renderComplexityTable(this.complexities.medium)}                    
                 </div>
             </div>
             <div class="setting__block setting__block_background">
@@ -37,12 +42,12 @@ class Setting extends HTMLElement {
         this.addListeners();
     }  
 
-    renderComplexityTable(rowNumber, colNumber){
+    renderComplexityTable(complexity){
         let table = document.createElement('table');
         table.classList.add('complexity');
-        for(let i = 1; i <= rowNumber; i++){
+        for(let i = 1; i <= complexity.y; i++){
             let tr = document.createElement('tr');
-            for(let j = 1; j <= colNumber; j++){
+            for(let j = 1; j <= complexity.x; j++){
                 let td = document.createElement('td');
                 td.textContent = `${i} x ${j}`;
                 tr.appendChild(td);
@@ -71,7 +76,7 @@ class Setting extends HTMLElement {
             this.dispatchEvent(new CustomEvent('settingSaved', { 
                 bubbles: true,
                 detail: {
-                    complexity: this.complexity, 
+                    complexity: this.complexities[this.complexity], 
                     background: this.background 
                 }                
             }));

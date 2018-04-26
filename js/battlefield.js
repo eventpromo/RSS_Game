@@ -4,12 +4,14 @@ class Battlefield extends HTMLElement{
         super();
         this.complexity = complexity;
         this.background = background;
-        this.number = this.complexity === 'novice' ? 9 : this.complexity === 'medium' ? 18 : this.complexity === 'advance' ? 36 : 0;
-        this.createdCallback();
+        this.number = this.complexity.x * this.complexity.y;
+        this.field = [];
+        this.createdCallback();        
     }
 
     createdCallback(){          
-        this.setAttribute('class', `battlefield battlefield_${this.complexity} battlefield__content g-all-height`);
+        this.setAttribute('class', `battlefield battlefield__content g-all-height`);
+        this.style = `grid-template: repeat(${this.complexity.y}, 1fr) / repeat(${this.complexity.x}, 1fr)`;
         for(let i = 0; i < this.number; i++){
             let element  = document.createElement('div');
             element.setAttribute('class', `battlefield__cell battlefield__cell_${this.background}`);                             
@@ -18,8 +20,16 @@ class Battlefield extends HTMLElement{
         this.addListeners();
     }  
 
-    addListeners(){        
-          
+    fillIn(){
+        //this.field
+    }
+
+    addListeners(){
+        this.addEventListener('click', (event) => {
+            if(event.target.classList.contains('battlefield__cell')){
+
+            }
+        });        
     }
 }
 

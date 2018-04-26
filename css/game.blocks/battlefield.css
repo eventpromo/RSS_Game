@@ -1,11 +1,16 @@
 .battlefield{
     display: grid;
-    grid-gap: 10px;      
+    grid-gap: 10px;   
+    width: 100%;   
 }
 
 .battlefield__cell{
     border: 1px solid #333366;
     background-color: #FF9999;        
+}
+
+.battlefield__cell:hover{
+    opacity: 0.8;
 }
 
 .battlefield__cell_got{    
@@ -14,16 +19,16 @@
     background-position: center;
 }
 
-.battlefield_medium{
-    grid-template: repeat(3, 1fr) / repeat(6, 1fr); 
+.battlefield__cell_football{    
+    background-image: url('../../img/football/0.png');
+    background-size: cover;
+    background-position: center;
 }
 
-.battlefield_novice{
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);    
-}
-
-.battlefield_advance{
-    grid-template: repeat(6, 1fr) / repeat(6, 1fr);
+.battlefield__cell_cars{    
+    background-image: url('../../img/cars/0.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .battlefield__content{
