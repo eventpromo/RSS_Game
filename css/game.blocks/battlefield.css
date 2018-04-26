@@ -10,7 +10,17 @@
 }
 
 .battlefield__cell:hover{
-    opacity: 0.8;
+    /* -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; */
+    -moz-transform: perspective(800px) rotateY(0deg);
+    -webkit-transform: perspective(800px) rotateY(0deg);
+    transform: perspective(800px) rotateY(0deg);
+    /* -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out 0s; */
 }
 
 .battlefield__cell_got{    
