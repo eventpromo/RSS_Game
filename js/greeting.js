@@ -1,4 +1,4 @@
-class Start extends HTMLElement{
+class Greeting extends HTMLElement{
     constructor(){
         super();
         this.createdCallback();
@@ -28,4 +28,4 @@ class Start extends HTMLElement{
     }
 }
 
-export default Start;
+export default Greeting;

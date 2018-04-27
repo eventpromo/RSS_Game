@@ -18,6 +18,7 @@ class Game extends HTMLElement {
         this.profile = new Profile();      
         this.setting = new Setting(); 
         this.dashboard.renderBody(this.greeting);
+        this.timerId;
         this.appendChild(this.dashboard);
         this.addListeners();
     }    
@@ -25,13 +26,13 @@ class Game extends HTMLElement {
     startTimer(minutes){        
         let seconds = minutes * 60;
         this.dashboard.timer.textContent = seconds.secondsToHhMmSs();
-        var timerId = setInterval(() => {
+        this.timerId = setInterval(() => {
             seconds--;
             this.dashboard.timer.textContent = seconds.secondsToHhMmSs();          
         }, 1000);
                 
         setTimeout(() => {
-            clearInterval(timerId); 
+            clearInterval(this.timerId); 
             this.dispatchEvent(new CustomEvent('finishGame', { bubbles: true, detail: {
                 won: false
             }}));  
@@ -76,6 +77,7 @@ class Game extends HTMLElement {
                 this.profile.save();
 
                 title.textContent = 'Вы выиграли!';
+                clearInterval(this.timerId); 
             }else{
                 title.textContent = 'Вы проиграли!';
             }         

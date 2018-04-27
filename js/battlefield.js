@@ -64,7 +64,7 @@ class Battlefield extends HTMLElement{
                     if(value === previousValue){
                         this.left = this.left - 2;
                         if(this.left == 0){
-                            this.dispatchEvent(new CustomEvent('finishGame', { details: { score: this.size, won: true}, bubbles: true }));
+                            this.dispatchEvent(new CustomEvent('finishGame', { detail: { score: this.size, won: true}, bubbles: true }));
                         }else{
                             this.blocked = false;
                             setTimeout(() => {                                

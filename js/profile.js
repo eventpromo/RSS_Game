@@ -8,7 +8,7 @@ class Profile extends HTMLElement{
             firstName: '',
             lastName: '', 
             email: '',
-            score: []         
+            scores: []         
         };
         this.createdCallback();
     }
