@@ -1,6 +1,15 @@
+const CurrentUser = 'GameCurrentUser';
+
 class Profile extends HTMLElement{ 
     constructor(){
-        super();
+        super(); 
+        const data = window.localStorage[CurrentUser];            
+        this.data = data ? JSON.parse(data) : {
+            firstName: '',
+            lastName: '', 
+            email: '',
+            score: []         
+        };
         this.createdCallback();
     }
     
@@ -9,15 +18,15 @@ class Profile extends HTMLElement{
         this.innerHTML = `<form class="profile__form form">
                 <div class="input-block profile__input-block">
                     <label class="label">Имя:</label>
-                    <input class="input" name="firstName" type="text" required>
+                    <input class="input" name="firstName" type="text" value="${this.data.firstName}" required>
                 </div>
                 <div class="input-block profile__input-block" >
                     <label class="label">Фамилия:</label>
-                    <input class="input" name="lastName" type="text" required>
+                    <input class="input" name="lastName" type="text" value="${this.data.lastName}" required>
                 </div>
                 <div class="input-block profile__input-block">
                     <label class="label">Email:</label>
-                    <input class="input" name="email" type="email" required>
+                    <input class="input" name="email" type="email" value="${this.data.email}" required>
                 </div>
                 <div class="input-block profile__input-block">
                     <input type="submit" class="save-button button" value="Сохранить данные"></button>
@@ -30,24 +39,21 @@ class Profile extends HTMLElement{
 
     addListeners(){
         this.saveButton.addEventListener('click', (event) => {
-            if(!this.form.checkValidity())
+            if(this.form.checkValidity())
             {
                 event.preventDefault();  
-                this.data = {
-                    firstName: this.form.firstName,
-                    lastName: this.form.lastName, 
-                    email: this.form.email
-                }
-                this.save();  
+                this.data.firstName = this.form.firstName.value;
+                this.data.lastName = this.form.lastName.value;
+                this.data.email = this.form.email.value;                   
+                this.save();
+                this.dispatchEvent(new CustomEvent('profileSaved', { detail: this.data, bubbles: true }));
             }                             
         });
-    }   
+    } 
     
     save(){
-        window.localStorage['currentUser'] = this.data.email;
-        window.localStorage[this.data.email] = JSON.stringify(this.data);
-        this.dispatchEvent(new CustomEvent('profileSaved', { detail: this.data, bubbles: true }));
-    }    
+        window.localStorage[CurrentUser] = JSON.stringify(this.data); 
+    }
 }
 
 

@@ -15,15 +15,15 @@ class Start extends HTMLElement{
                 <p class="rules__rule">Для старта необходимо ввести пользовательские данные.</p>
             </div> 
             <div>
-                <button class="button button_start">Заполнить данные</button>
+                <button class="button button_fillin">Заполнить данные</button>
             </div>`;
         this.addListeners();
     }  
 
     addListeners(){
-        this.startButton = this.querySelector('.button_start');
-        this.startButton.addEventListener('click', function(event){
-            this.dispatchEvent(new CustomEvent('startClick', { bubbles: true, detail: this.event }));
+        this.fillButton = this.querySelector('.button_fillin');
+        this.fillButton.addEventListener('click', function(event){
+            this.dispatchEvent(new CustomEvent('fillClick', { bubbles: true, detail: this.event }));
         });       
     }
 }

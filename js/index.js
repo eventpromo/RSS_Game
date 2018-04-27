@@ -12,6 +12,14 @@ Number.prototype.secondsToHhMmSs = function () {
     return hours + ':' + minutes + ':' + seconds;
 }
 
+Number.randomInt = function (min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+Array.randomInt = function (size, min, max) { 
+    return new Array(size).fill(0).map(x => Number.randomInt(min, max));
+}
+
 document.registerElement('match-game', Game);
 
 document.addEventListener("DOMContentLoaded", function () {

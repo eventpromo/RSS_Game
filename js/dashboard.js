@@ -31,19 +31,19 @@ class Dashboard extends HTMLElement {
 
     addListeners(){
         this.newGameButton = this.querySelector('.button_new-game');
-        this.newGameButton.addEventListener('click', function(){
-
+        this.newGameButton.addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('newGame', { bubbles: true }));
         });
         
         this.profileButton = this.querySelector('.button_profile');
-        this.profileButton.addEventListener('click', function(){
+        this.profileButton.addEventListener('click', () => {
             
         });
 
         this.ratingButton = this.querySelector('.button_rating');
-        this.ratingButton.addEventListener('click', function(){
+        this.ratingButton.addEventListener('click', () => {
             
-        });
+        });         
     }
 }
 
