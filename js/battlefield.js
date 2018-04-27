@@ -5,8 +5,7 @@ class Battlefield extends HTMLElement{
         this.complexity = complexity;
         this.background = background;
         this.size = this.complexity.x * this.complexity.y;
-        this.previousClickedCell;  
-        this.blocked = false;   
+        this.previousClickedCell;            
         this.left = this.size;
         this.fillIn();
         this.createdCallback();        
@@ -27,7 +26,7 @@ class Battlefield extends HTMLElement{
     fillIn(){
         this.field = new Array(this.size).fill(0);
         let values = Array.randomInt(this.size / 2, 1, 10);
-        values = values.concat(values);
+        values = [...values, ...values];
         values.forEach(element => {
             const emptyCells = this.field.map((x, i) => {
                 return {
@@ -43,12 +42,13 @@ class Battlefield extends HTMLElement{
     }
 
     addListeners(){
+        let blocked = false;
         this.addEventListener('click', (event) => {
             let element = event.target;
             if(element.classList.contains('battlefield__cell')){
                 if(element.classList.contains('battlefield__cell_hidden') 
                 || element.style.backgroundImage
-                || this.blocked){
+                || blocked){
                     return;
                 }
                 const index = element.dataset.index;
@@ -59,14 +59,12 @@ class Battlefield extends HTMLElement{
                     this.previousClickedCell = element;
                 }
                 else{
-                    this.blocked = true;
                     const previousValue = this.field[this.previousClickedCell.dataset.index];
                     if(value === previousValue){
                         this.left = this.left - 2;
                         if(this.left == 0){
                             this.dispatchEvent(new CustomEvent('finishGame', { detail: { score: this.size, won: true}, bubbles: true }));
                         }else{
-                            this.blocked = false;
                             setTimeout(() => {                                
                                 element.classList.add('battlefield__cell_hidden');
                                 this.previousClickedCell.classList.add('battlefield__cell_hidden');                            
@@ -74,7 +72,6 @@ class Battlefield extends HTMLElement{
                         }                        
                     }else{
                         setTimeout(() => {
-                            this.blocked = false;
                             element.style.backgroundImage = '';
                             this.previousClickedCell.style.backgroundImage = '';
                             this.previousClickedCell = null;

@@ -4,12 +4,14 @@ import Profile from './profile';
 import Setting from './setting';
 import Greeting from './greeting';
 import Battlefield from './battlefield';
+import Rating from './rating';
 
 customElements.define('game-dashboard', Dashboard);
 customElements.define('game-greeting', Greeting);
 customElements.define('game-profile', Profile);
 customElements.define('game-setting', Setting);
 customElements.define('game-battlefield', Battlefield);
+customElements.define('game-rating', Rating);
 
 class Game extends HTMLElement {
     createdCallback() {
@@ -42,6 +44,14 @@ class Game extends HTMLElement {
     addListeners() {
         this.addEventListener('fillClick', function (event) {            
             this.dashboard.renderBody(this.profile);
+        });
+
+        this.addEventListener('profileClick', function (event) {            
+            this.dashboard.renderBody(this.profile);
+        });
+
+        this.addEventListener('ratingClick', function (event) {            
+            this.dashboard.renderBody(new Rating(this.profile.data.scores));
         });
 
         this.addEventListener('newGame', function (event) {   

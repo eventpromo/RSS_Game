@@ -37,12 +37,12 @@ class Dashboard extends HTMLElement {
         
         this.profileButton = this.querySelector('.button_profile');
         this.profileButton.addEventListener('click', () => {
-            
+            this.dispatchEvent(new CustomEvent('profileClick', { bubbles: true }));
         });
 
         this.ratingButton = this.querySelector('.button_rating');
         this.ratingButton.addEventListener('click', () => {
-            
+            this.dispatchEvent(new CustomEvent('ratingClick', { bubbles: true }));
         });         
     }
 }
