@@ -2,11 +2,11 @@
 import Dashboard from './dashboard';
 import Profile from './profile';
 import Setting from './setting';
-import Start from './start';
+import Greeting from './greeting';
 import Battlefield from './battlefield';
 
 customElements.define('game-dashboard', Dashboard);
-customElements.define('game-start', Start);
+customElements.define('game-greeting', Greeting);
 customElements.define('game-profile', Profile);
 customElements.define('game-setting', Setting);
 customElements.define('game-battlefield', Battlefield);
@@ -14,10 +14,10 @@ customElements.define('game-battlefield', Battlefield);
 class Game extends HTMLElement {
     createdCallback() {
         this.dashboard = new Dashboard();
-        this.start = new Start();   
+        this.greeting = new Greeting();   
         this.profile = new Profile();      
         this.setting = new Setting(); 
-        this.dashboard.renderBody(this.start);
+        this.dashboard.renderBody(this.greeting);
         this.appendChild(this.dashboard);
         this.addListeners();
     }    
