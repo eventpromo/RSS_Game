@@ -4,9 +4,7 @@ class Battlefield extends HTMLElement{
         super();
         this.complexity = complexity;
         this.background = background;
-        this.size = this.complexity.x * this.complexity.y;
-        this.previousClickedCell;            
-        this.left = this.size;
+        this.size = this.complexity.x * this.complexity.y;                          
         this.fillIn();
         this.createdCallback();        
     }
@@ -41,42 +39,82 @@ class Battlefield extends HTMLElement{
         });
     }
 
-    addListeners(){
-        let blocked = false;
+    animate(options) {
+
+        var start = performance.now();
+      
+        requestAnimationFrame(function animate(time) {
+          // timeFraction от 0 до 1
+          var timeFraction = (time - start) / options.duration;
+          if (timeFraction > 1) timeFraction = 1;
+      
+          // текущее состояние анимации
+          var progress = options.timing(timeFraction)
+      
+          options.draw(progress);
+      
+          if (timeFraction < 1) {
+            requestAnimationFrame(animate);
+          }
+      
+        });
+      }
+
+    addListeners(){        
+        let pair = [];
+        let left = this.size;
         this.addEventListener('click', (event) => {
             let element = event.target;
             if(element.classList.contains('battlefield__cell')){
-                if(element.classList.contains('battlefield__cell_hidden') 
-                || element.style.backgroundImage
-                || blocked){
+                if(pair.length === 2
+                || element == pair[0]
+                || element.classList.contains('battlefield__cell_hidden')){
                     return;
                 }
+
+                pair.push(element);
+
                 const index = element.dataset.index;
                 const value = this.field[index];
-                element.style.backgroundImage = `url("./img/${this.background}/${value}.png")`;
-
-                if(!this.previousClickedCell){
-                    this.previousClickedCell = element;
-                }
-                else{
-                    const previousValue = this.field[this.previousClickedCell.dataset.index];
+                element.classList.add('battlefield__cell_open');
+                setTimeout(() => {
+                    element.style.backgroundImage = `url("./img/${this.background}/${value}.png")`; 
+                }, 0.3);                               
+                if(pair.length === 2){
+                    const previousValue = this.field[pair[0].dataset.index];
                     if(value === previousValue){
-                        this.left = this.left - 2;
-                        if(this.left == 0){
+                        left = left - 2;
+                        if(left == 0){
                             this.dispatchEvent(new CustomEvent('finishGame', { detail: { score: this.size, won: true}, bubbles: true }));
                         }else{
-                            setTimeout(() => {                                
-                                element.classList.add('battlefield__cell_hidden');
-                                this.previousClickedCell.classList.add('battlefield__cell_hidden');                            
+                            this.animate({
+                                duration: 600,
+                                timing: function(timeFraction) {
+                                  return timeFraction;
+                                },
+                                draw: function(progress) {                                    
+                                    pair[0].style.opacity = 1 - progress;
+                                    pair[1].style.opacity = 1 - progress;
+                                }
+                              });
+                            setTimeout(() => {    
+                                pair[0].classList.add('battlefield__cell_hidden');
+                                pair[1].classList.add('battlefield__cell_hidden');                            
+                                pair = []; 
                             }, 700);
                         }                        
                     }else{
-                        setTimeout(() => {
-                            element.style.backgroundImage = '';
-                            this.previousClickedCell.style.backgroundImage = '';
-                            this.previousClickedCell = null;
+                        element.classList.add('battlefield__cell_close');                        
+                        setTimeout(() => {                            
+                            pair[0].classList.remove('battlefield__cell_open', 'battlefield__cell_close');
+                            pair[1].classList.remove('battlefield__cell_open', 'battlefield__cell_close');                                                                                 
+                            setTimeout(() => {
+                                pair[0].style.backgroundImage = '';
+                                pair[1].style.backgroundImage = '';                            
+                                pair = [];                      
+                            }, 400);
                         }, 700);
-                    }
+                    }                                
                 }                
             }
         });        

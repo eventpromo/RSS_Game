@@ -7,14 +7,14 @@ class Dashboard extends HTMLElement {
         this.setAttribute('class', 'dashboard dashboard__content g-all-height');
         this.innerHTML = `<div class="header">
                 <div class="header__game">
-                    <button class="button button_new-game">New game</button>
+                    <button class="button button_new-game">Новая игра</button>
                 </div>
                 <div class="header_timer">
                     <div class="timer"></div>
                 </div>
                 <div class="header__user">
-                    <button class="button button_profile">Profile</button>
-                    <button class="button button_rating">Rating</button>
+                    <button class="button button_profile">Профиль</button>
+                    <button class="button button_rating">Результаты</button>
                 </div>
             </div>
             <div class="dashboard__body"></div>`;            
@@ -23,9 +23,13 @@ class Dashboard extends HTMLElement {
         this.addListeners();
     }  
 
-    renderBody(element){            
+    renderBody(element){       
+        this.dispatchEvent(new CustomEvent('renderingBody', { bubbles: true }));           
         this.body.innerHTML = '';
-        this.body.appendChild(element);
+        this.body.appendChild(element);        
+        setTimeout(() => {
+            this.dispatchEvent(new CustomEvent('renderedBody', { bubbles: true }));    
+        }, 0);        
         return this.body;
     }
 

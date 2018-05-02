@@ -33,13 +33,19 @@ class Game extends HTMLElement {
             this.dashboard.timer.textContent = seconds.secondsToHhMmSs();          
         }, 1000);
                 
-        setTimeout(() => {
-            clearInterval(this.timerId); 
+        setTimeout(() => {  
+            this.endTimer();
             this.dispatchEvent(new CustomEvent('finishGame', { bubbles: true, detail: {
                 won: false
             }}));  
         }, minutes * 60 * 1000);
-    }    
+    }       
+
+    endTimer(){
+        clearInterval(this.timerId);
+        this.timerId = null;
+        this.dashboard.timer.textContent = '';  
+    }
 
     addListeners() {
         this.addEventListener('fillClick', function (event) {            
@@ -76,21 +82,31 @@ class Game extends HTMLElement {
             this.startTimer(2);
         }); 
 
+        this.addEventListener('renderingBody', (event) => {  
+            if(this.timerId){
+                this.endTimer(); 
+                this.profile.data.scores.push({
+                    date: new Date().toLocaleDateString("en-US"), 
+                    score: 0
+                });                     
+            }            
+        }); 
+
         this.addEventListener('finishGame', (event) => {
             let title = document.createElement('h2');
             title.classList.add('title');  
-            if(event.detail.won) {
-                this.profile.data.scores.push({
-                    date: new Date(), 
-                    score: event.detail.score
-                });
-                this.profile.save();
-
+            let score = 0;
+            if(event.detail.won) {                                
+                score = event.detail.score;
                 title.textContent = 'Вы выиграли!';
                 clearInterval(this.timerId); 
-            }else{
+            }else{               
                 title.textContent = 'Вы проиграли!';
-            }         
+            }   
+            this.profile.data.scores.push({
+                date: new Date().toLocaleDateString("en-US"), 
+                score: score
+            });      
             this.dashboard.renderBody(title);     
         });         
     }

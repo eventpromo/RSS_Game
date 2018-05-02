@@ -50,3 +50,54 @@
     box-sizing: border-box;
 }
 
+.battlefield__cell_open {       
+    animation-name: rotator1;    
+    animation-duration: .7s;
+}
+
+.battlefield__cell_close {       
+    animation-name: rotator2;    
+    animation-duration: .7s;
+}
+
+@keyframes rotator1{
+    0% {
+        transform: rotate3d(0, 1, 0, 180deg);
+        animation-timing-function: ease-in;
+    }
+    
+    40% {
+        transform: rotate3d(0, 1, 0, -30deg);
+        animation-timing-function: ease-in;
+    }
+    60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 20deg);
+    }
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -10deg);
+    }
+    100% {
+        transform: perspective(400px);
+    }
+}
+
+@keyframes rotator2{
+    0% {
+        transform: rotate3d(0, 1, 0, -180deg);
+        animation-timing-function: ease-in;
+    }
+    
+    40% {
+        transform: rotate3d(0, 1, 0, 30deg);
+        animation-timing-function: ease-in;
+    }
+    60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    }
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    }
+    100% {
+        transform: perspective(400px);
+    }
+}
